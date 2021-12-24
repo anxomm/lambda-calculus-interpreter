@@ -1,0 +1,64 @@
+true;
+let x = true in x;
+if false then true else false;
+0;
+succ (succ (succ 0));
+3;
+succ (pred 0);
+iszero (pred (succ (succ 0)));
+if iszero 3 then 0 else 1;
+iszero true;
+if 1 then true else false;
+if iszero 3 then 0 else false;
+let id = Lx.x in id 3;
+let id_bool = L x:Bool. x in id_bool true;
+let id_nat = L x:Nat. x in id_nat 5;
+let x = 5 in let id_nat = L x:Nat. x in id_nat x;
+let fix = lambda f.(lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y)) in let sumaux = lambda f. (lambda n. (lambda m. if (iszero n) then m else succ (f (pred n) m))) in let sum = fix sumaux in sum 21 34;
+let fix = lambda f.(lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y)) in let sumaux = lambda f. (lambda n. (lambda m. if (iszero n) then m else succ (f (pred n) m))) in let sum = fix sumaux in let prodaux = lambda f. (lambda n. (lambda m. if (iszero (pred n)) then m else sum (f (pred n) m) m)) in let prod = fix prodaux in prod 12 5;
+letrec sum : Nat -> Nat -> Nat = lambda n : Nat. lambda m : Nat. if iszero n then m else succ (sum (pred n) m) 
+in sum 32 41;
+letrec prod : Nat -> Nat -> Nat = 
+    letrec sum : Nat -> Nat -> Nat = lambda n : Nat. lambda m : Nat. if iszero n then m else succ (sum (pred n) m) in
+    lambda n : Nat. lambda m : Nat. if iszero n then 0 else sum (prod (pred n) m) m 
+in prod 11 7;
+let fib = lambda n : Nat.
+    letrec sum : Nat -> Nat -> Nat = lambda n : Nat. lambda m : Nat. if iszero n then m else succ (sum (pred n) m) in
+    letrec fib2 : Nat -> Nat -> Nat -> Nat = lambda i: Nat .lambda n : Nat. lambda m : Nat. if iszero i then m else fib2 (pred i) m (sum n m) in fib2 n 0 1
+in fib 2;
+x = true; 
+id = lambda x:Bool. x;
+id x;
+"str1ng!";
+";";
+""";
+"a" ^ "b";
+((Ls:String. "" ^ s) "a") ^ "b";
+"" ^ ((Ls:String. "a" ^ s) "b");
+let f = L x:Nat. L y:String. if iszero x then ("a" ^ "b") ^ ("c" ^ "d") else y in f 0 "test";
+1 ^ "ab";
+"ab" ^ false;
+{1, "a"};
+{{2, {pred 1, "a"}}, Lx:Bool. x};
+{1};
+{1, "a", false};
+first {1, "a"};
+second {1, "a"};
+let x = {Lx:Nat. pred x, Lx:Nat. succ (succ x)} in {first x 3, second x 0};
+first 1;
+second "a";
+{a = 1, b = false, c = "a", d = {1, 2}, e = { a = 2 }, f = Lx:Nat.x};
+{a = 1, b = 2, c = 3}.c;
+{a = 1, b = 2, c = 3, c = 4}.c;
+{};
+(Lx:{a:Nat, b:String}. x.a) {a = 1, b = "b"};
+{a = 1, b = 2, c = 3}.d;
+(Lx:{a:Nat}. x.a) {a = 1, b = 2};
+(Lx:{b:Nat,a:Nat}. x.a) {a = 1, b = 2};
+(Lx:{a:Nat, b:{}}. x.b) {a = 1, b = {c = 2}};
+(Lx:{a:Nat, b:{}}. x.b) {c = false, b = {b2 = true}, a = 1};
+let p = Lx:{f : {a:Nat, b:String} -> Nat, r : {a:Nat, b:String}}. x.f (x.r) in 
+let g = { f = Lx:{a : Nat}. succ (x.a), r = {a = 1, b = "2", c = false}, t = false} in 
+p g;
+(Lx:Top.x) 1;
+(Lx:Top.x) {false, 0};
