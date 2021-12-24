@@ -4,7 +4,8 @@ This project aims to build a simple λ-calculus interpreter, following and
 expanding some of the rules explained in _Types and Programming Languages_
 by Benjamin C. Pierce. These rules are summed up [here](summary_of_rules.pdf).
 
-It has been developed by @xeferz and @anxomm.
+It has been developed by [@xeferz](https://github.com/xeferz) and
+[@anxomm](https://github.com/anxomm).
 
 ## Usage
 
@@ -38,14 +39,14 @@ just have a look at [examples](examples.txt).
 
 3. Variable definitions:
 
-```OCaml
+```
 >> x = 5;
 x : Nat = 5
 ```
 
 4. Booleans:
 
-```OCaml
+```
 >> true; 
 - : Bool = true
 >> false;
@@ -54,7 +55,7 @@ x : Nat = 5
 
 5. Naturals: with successor, predecessor and iszero operations:
 
-```OCaml
+```
 >> 1;
 - : Nat = 1
 >> succ 1;
@@ -67,14 +68,14 @@ x : Nat = 5
 
 5. If structure: the type of both branches must be the same, and the guard a Bool
 
-```OCaml
+```
 >> if iszero x then 1 else 2;
 - : Nat = 2
 ```
 
 6. Function definitions: they must be typed
 
-```OCaml
+```
 >> lambda x:Bool. x;
 - : (Bool) -> (Bool) = (lambda x:Bool. x)
 >> L x:Bool. x;     
@@ -83,14 +84,14 @@ x : Nat = 5
 
 7. Local expressions: similar to _let ... in_ in functional programming
 
-```OCaml
+```
 >> let x = 1 in succ x;
 - : Nat = 2
 ```
 
 8. Recursive expressions:
 
-```OCaml
+```
 >> letrec sum : Nat -> Nat -> Nat = lambda n : Nat. lambda m : Nat. if iszero n then m else succ (sum (pred n) m) 
 in sum 32 41;
 - : Nat = 73
@@ -98,7 +99,7 @@ in sum 32 41;
 
 9. Strings: '"' and ";" are not allowed inside a String, and the contatenation operation 
 
-```OCaml
+```
 >> "a";
 - : String = "a"
 >> "a" ^ "b";
@@ -107,7 +108,7 @@ in sum 32 41;
 
 10. Pairs: a pair of elements of any type, and the projection of the _first_ and _second_ element
 
-```OCaml
+```
 >> p = {0, false};
 p : {Nat, Bool} = {0, false}
 >> first p;
@@ -118,7 +119,7 @@ p : {Nat, Bool} = {0, false}
 
 11. Records: sequence of elements of any type with and id, and the projection of the field by the id
 
-```OCaml
+```
 >> r = {a = 0, b = { a = 2 }, c = L x:Nat. x};        
 r : { a : Nat, b : { a : Nat }, c : (Nat) -> (Nat) } = { a = 0, b = { a = 2 }, c = (lambda x:Nat. x) }
 >> r.a;                                        
@@ -129,7 +130,7 @@ r : { a : Nat, b : { a : Nat }, c : (Nat) -> (Nat) } = { a = 0, b = { a = 2 }, c
 
 12. Top: root type
 
-```OCaml
+```
 >> f = L x:Top. x;    
 f : (Top) -> (Top) = (lambda x:Top. x)
 >> f 1;
@@ -156,7 +157,7 @@ Executing the command `debug = <Bool>;` you can switch between the default mode
 and the debug mode. In this mode, intermediate expressions resulted from an
 evaluation of a term are also printed:
 
-```OCaml
+```
 >> debug = true;
 debug : Bool = true
 >> let x = first {succ 1, true} in iszero x;
