@@ -25,8 +25,6 @@ and to execute you have two options, the interactive console or passing a file:
 If passing a file, the evaluation will stop if an error is found. In this case,
 the line where the error is detected will be printed.
 
----
-
 ## Syntax
 
 This section describes how the interpreter shoud be used, what types are
@@ -138,7 +136,6 @@ f : (Top) -> (Top) = (lambda x:Top. x)
 >> f {false, 0};
 - : Top = {false, 0}
 ```
----
 
 ## Special behaviour
 
